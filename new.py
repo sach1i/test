@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.uix.button import Button
 from plyer import gps
 
 class MainApp(App):
@@ -8,6 +9,13 @@ class MainApp(App):
         gps.stop()
 
     def on_gps(self, **kwargs):
-        print('lat: {lat}, lon: {lon}'.format(**kwargs))
+        lat = 'lat: {lat}'.format(**kwargs)
+        lon = 'lon: {lon}'.format(**kwargs)
+        return (lat,lon)
+
+    def build(self):
+        self.my_func()
+        result = self.on_gps()
+        return Button(text=result)
 
 MainApp().run()
